@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:v="clr-namespace:JamTax.View"
+             x:Class="JamTax.Core.JamTaxShell"
+                BackgroundColor="DarkRed"
+      
+              Title="">
+    <FlyoutItem Title="Tax Calculator" FlyoutIcon="ic_calculate.png">
+        <Tab>
+            <ShellContent  ContentTemplate="{DataTemplate v:TaxCalculatorView}"/>
+        </Tab>
+    </FlyoutItem>
+</Shell>

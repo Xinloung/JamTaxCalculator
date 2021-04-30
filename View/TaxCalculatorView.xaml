@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JamTax.View.TaxCalculatorView"
+             xmlns:v="clr-namespace:JamTax.ViewModel"
+             Title="{Binding Title}"
+            
+             >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontSize" Value="Title"/>
+            </Style>
+            <Style TargetType="Picker">
+                <Setter Property="TextColor" Value="DarkSlateGray"/>
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="DarkOrange"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontFamily" Value="Lucida Sans"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <v:IncomeTaxCalculatorViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".3*"/>
+            <RowDefinition Height=".3*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Entry Text="{Binding GetIncome}" 
+               Placeholder="Income(Gross)" 
+               PlaceholderColor="LightGray"
+               Grid.Column="0" 
+               Grid.ColumnSpan="2" 
+               Grid.Row="0" 
+               HorizontalTextAlignment="Center" 
+               Keyboard="Numeric"
+               />
+        
+        <Entry Text="{Binding PensionRate}" 
+               Placeholder="Pension Rate)" 
+               PlaceholderColor="LightGray" 
+               Grid.Column="2" 
+               Grid.Row="0"  
+               HorizontalTextAlignment="Center" 
+               Keyboard="Numeric"/>
+
+        <Picker 
+            Grid.Row="0" 
+            Grid.Column="3"  
+            ItemsSource="{Binding PayCycle}" 
+            SelectedIndex="{Binding PayCycleIndex}" 
+            WidthRequest="200"/>
+
+        <Label Text="Tax Breakdown" 
+               FontSize="Title" 
+               HorizontalOptions="CenterAndExpand" 
+               VerticalOptions="CenterAndExpand" 
+               Grid.Row="1" Grid.ColumnSpan="4" />
+         
+        <StackLayout 
+             Grid.Row="2" 
+             Grid.ColumnSpan="2" 
+             Padding="10" 
+             Spacing="2">
+             
+            <Label 
+                Text="NIS:" 
+                FontSize="Medium" 
+                HorizontalOptions="StartAndExpand" 
+                VerticalOptions="StartAndExpand"/>
+            
+            <Label Text="Pension:" 
+                   FontSize="Medium" 
+                   HorizontalOptions="StartAndExpand" 
+                   VerticalOptions="StartAndExpand"/>
+            
+            <Label Text="Income Tax:" 
+                   FontSize="Medium" 
+                   HorizontalOptions="StartAndExpand" 
+                   VerticalOptions="StartAndExpand"/>
+            
+            <Label Text="Education Tax:" 
+                   FontSize="Medium" 
+                   HorizontalOptions="StartAndExpand" 
+                   VerticalOptions="StartAndExpand"/>
+            
+            <Label Text="NHT:" 
+                   FontSize="Medium" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
+        </StackLayout>
+        <RefreshView Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="3">
+            <StackLayout Padding="10" Spacing="2">
+                <Label Text="{Binding NIS, StringFormat='{0:C2}'}" FontSize="Medium" HorizontalOptions="EndAndExpand" VerticalOptions="StartAndExpand" />
+                <Label Text="{Binding PensionableAmount, StringFormat='{0:C2}'}" FontSize="Medium" HorizontalOptions="EndAndExpand" VerticalOptions="StartAndExpand"/>
+                <Label Text="{Binding IncomeTax, StringFormat='{0:C2}'}" FontSize="Medium" HorizontalOptions="EndAndExpand" VerticalOptions="StartAndExpand"/>
+                <Label Text="{Binding EducationTax, StringFormat='{0:C2}'}" FontSize="Medium" HorizontalOptions="EndAndExpand" VerticalOptions="StartAndExpand"/>
+                <Label Text="{Binding NHT, StringFormat='{0:C2}'}" FontSize="Medium" HorizontalOptions="EndAndExpand" VerticalOptions="StartAndExpand"/>
+            </StackLayout>
+        </RefreshView>
+
+    </Grid>
+</ContentPage>
